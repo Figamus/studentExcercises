@@ -18,9 +18,10 @@ namespace StudentExercises
         public string SlackHandle;
         public int CohortNumber;
 
-        public void AssignStudent()
+// Assignment method thanks to Kimmy
+        public void AssignStudent(Excercise excercise, Student student)
         {
-            Console.WriteLine("");
+            student.StudentsExercises.Add(excercise);
         }
     }
 }

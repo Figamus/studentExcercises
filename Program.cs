@@ -18,40 +18,54 @@ namespace StudentExercises
     {
         static void Main(string[] args)
         {
+            Cohort Cohort26 = new Cohort()
+            {
+                CohortName = "Cohort 26",
+            };
+
+            Cohort Cohort27 = new Cohort()
+            {
+                CohortName = "Cohort 27",
+            };
+
+            Cohort Cohort28 = new Cohort()
+            {
+                CohortName = "Cohort 28",
+            };
             Student Daniel = new Student()
             {
                 FirstName = "Daniel",
                 LastName = "Figueroa",
                 SlackHandle = "Daniel Figueroa",
-                StudentCohort = 27,
+                StudentCohort = Cohort27,
             };
             Student Ricky = new Student()
             {
                 FirstName = "Ricky",
                 LastName = "Bruner",
                 SlackHandle = "Ricky Brunder",
-                StudentCohort = 27,
+                StudentCohort = Cohort27,
             };
             Student Adelaide = new Student()
             {
                 FirstName = "Adelaide",
                 LastName = "Yoder",
                 SlackHandle = "Adelaide Yoder",
-                StudentCohort = 26,
+                StudentCohort = Cohort26,
             };
             Student Jennifer = new Student()
             {
                 FirstName = "Jennifer",
                 LastName = "Lawson",
                 SlackHandle = "Jennifer Lawson",
-                StudentCohort = 26,
+                StudentCohort = Cohort26,
             };
             Student John = new Student()
             {
                 FirstName = "John",
                 LastName = "Wood",
                 SlackHandle = "John Wood",
-                StudentCohort = 28,
+                StudentCohort = Cohort28,
             };
 
             Excercise ExcerciseHTML = new Excercise()
@@ -80,11 +94,6 @@ namespace StudentExercises
             ExcercisesList.Add(ExcerciseSets);
             ExcercisesList.Add(ExcerciseDictionaries);
             ExcercisesList.Add(ExcerciseNutshell);
-
-            Cohort Cohort26 = new Cohort()
-            {
-                CohortName = "Cohort 26",
-            };
         }
     }
 }
