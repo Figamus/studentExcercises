@@ -18,6 +18,7 @@ namespace StudentExercises
     {
         static void Main(string[] args)
         {
+            // COHORTS
             Cohort Cohort26 = new Cohort()
             {
                 CohortName = "Cohort 26",
@@ -32,6 +33,8 @@ namespace StudentExercises
             {
                 CohortName = "Cohort 28",
             };
+
+            // STUDENTS
             Student Daniel = new Student()
             {
                 FirstName = "Daniel",
@@ -68,6 +71,16 @@ namespace StudentExercises
                 StudentCohort = Cohort28,
             };
 
+            // INSTRUCTORS
+            Instructor Brenda = new Instructor()
+            {
+                FirstName = "Brenda",
+                LastName = "Long",
+                SlackHandle = "Brenda Long",
+                InstructorCohort = Cohort27,
+            };
+
+            // EXCERCISES
             Excercise ExcerciseHTML = new Excercise()
             {
                 ExcerciseName = "HTML",
@@ -89,11 +102,9 @@ namespace StudentExercises
                 ExcerciseLanguage = "Javascript"
             };
 
-            List<Excercise> ExcercisesList = new List<Excercise>();
-            ExcercisesList.Add(ExcerciseHTML);
-            ExcercisesList.Add(ExcerciseSets);
-            ExcercisesList.Add(ExcerciseDictionaries);
-            ExcercisesList.Add(ExcerciseNutshell);
+            // Assigning Excersises to Students
+            Brenda.AssignStudent(ExcerciseHTML, Daniel);
+            Brenda.AssignStudent(ExcerciseNutshell, Ricky);
         }
     }
 }
