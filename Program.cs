@@ -11,6 +11,7 @@ Have each instructor assign 2 exercises to each of the students.
 */
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StudentExercises
 {
@@ -79,32 +80,77 @@ namespace StudentExercises
                 SlackHandle = "Brenda Long",
                 InstructorCohort = Cohort27,
             };
+            Instructor Jisie = new Instructor()
+            {
+                FirstName = "Jisie",
+                LastName = "David",
+                SlackHandle = "Jisie David",
+                InstructorCohort = Cohort26,
+            };
+            Instructor Steve = new Instructor()
+            {
+                FirstName = "Steve",
+                LastName = "Brownlee",
+                SlackHandle = "Steve Brownlee",
+                InstructorCohort = Cohort27,
+            };
 
-            // EXCERCISES
-            Excercise ExcerciseHTML = new Excercise()
+            // ExerciseS
+            Exercise ExerciseHTML = new Exercise()
             {
-                ExcerciseName = "HTML",
-                ExcerciseLanguage = "HTML"
+                ExerciseName = "HTML",
+                ExerciseLanguage = "HTML"
             };
-            Excercise ExcerciseSets = new Excercise()
+            Exercise ExerciseSets = new Exercise()
             {
-                ExcerciseName = "Sets",
-                ExcerciseLanguage = "C#"
+                ExerciseName = "Sets",
+                ExerciseLanguage = "C#"
             };
-            Excercise ExcerciseDictionaries = new Excercise()
+            Exercise ExerciseDictionaries = new Exercise()
             {
-                ExcerciseName = "Dictionaries",
-                ExcerciseLanguage = "C#"
+                ExerciseName = "Dictionaries",
+                ExerciseLanguage = "C#"
             };
-            Excercise ExcerciseNutshell = new Excercise()
+            Exercise ExerciseNutshell = new Exercise()
             {
-                ExcerciseName = "Nutshell",
-                ExcerciseLanguage = "Javascript"
+                ExerciseName = "Nutshell",
+                ExerciseLanguage = "Javascript"
             };
 
             // Assigning Excersises to Students
-            Brenda.AssignStudent(ExcerciseHTML, Daniel);
-            Brenda.AssignStudent(ExcerciseNutshell, Ricky);
+            Brenda.AssignStudent(ExerciseHTML, Daniel);
+            Brenda.AssignStudent(ExerciseNutshell, Ricky);
+
+            // For this Exercise, you need to create 4 new List instances to Program.cs: one to contain students, one to contain Exercises, one to contain instructors, and one to contain cohorts.
+            List<Student> StudentList = new List<Student>();
+            StudentList.Add(Daniel);
+            StudentList.Add(Ricky);
+            StudentList.Add(Adelaide);
+            StudentList.Add(Jennifer);
+            StudentList.Add(John);
+
+            List<Exercise> ExerciseList = new List<Exercise>();
+            ExerciseList.Add(ExerciseHTML);
+            ExerciseList.Add(ExerciseSets);
+            ExerciseList.Add(ExerciseDictionaries);
+            ExerciseList.Add(ExerciseNutshell);
+
+            List<Instructor> InstructorList = new List<Instructor>();
+            InstructorList.Add(Brenda);
+            InstructorList.Add(Jisie);
+            InstructorList.Add(Steve);
+
+            List<Cohort> CohortList = new List<Cohort>();
+            CohortList.Add(Cohort26);
+            CohortList.Add(Cohort27);
+            CohortList.Add(Cohort28);
+
+            // List exercises for the JavaScript language by using the Where() LINQ method.
+            var filtered = ExerciseList.Where(e => e.ExerciseLanguage == "Javascript").ToList();
+            foreach(Exercise e in filtered) {
+            Console.WriteLine($"{e.ExerciseName}");
+
+            }
         }
     }
 }

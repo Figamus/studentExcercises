@@ -6,9 +6,9 @@ Language of exercise (JavaScript, Python, CSharp, etc.)
 */
 namespace StudentExercises
 {
-    public class Excercise
+    public class Exercise
     {
-        public string ExcerciseName;
-        public string ExcerciseLanguage;
+        public string ExerciseName;
+        public string ExerciseLanguage;
     }
 }

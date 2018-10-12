@@ -19,9 +19,9 @@ namespace StudentExercises
         public Cohort InstructorCohort;
 
 // Assignment method thanks to Kimmy
-        public void AssignStudent(Excercise excercise, Student student)
+        public void AssignStudent(Exercise Exercise, Student student)
         {
-            student.StudentsExercises.Add(excercise);
+            student.StudentsExercises.Add(Exercise);
         }
     }
 }

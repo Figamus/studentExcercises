@@ -16,12 +16,12 @@ namespace StudentExercises
     {
         public Student()
         {
-            StudentsExercises =  new List<Excercise>();
+            StudentsExercises =  new List<Exercise>();
         }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string SlackHandle { get; set; }
         public Cohort StudentCohort { get; set; }
-        public List<Excercise> StudentsExercises;
+        public List<Exercise> StudentsExercises;
     }
 }
