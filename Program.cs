@@ -120,6 +120,7 @@ namespace StudentExercises
             // Assigning Excersises to Students
             Brenda.AssignStudent(ExerciseHTML, Daniel);
             Brenda.AssignStudent(ExerciseNutshell, Ricky);
+            Brenda.AssignStudent(ExerciseDictionaries, Ricky);
 
             // For this Exercise, you need to create 4 new List instances to Program.cs: one to contain students, one to contain Exercises, one to contain instructors, and one to contain cohorts.
             List<Student> StudentList = new List<Student>();
@@ -176,12 +177,20 @@ namespace StudentExercises
             }
 
             Console.WriteLine("--------------------------------------");
-            
+
             // Display any students that aren't working on any exercises
             var filteredStudent2 = StudentList.Where(e => e.StudentsExercises.Count() == 0).ToList();
             foreach(Student e in filteredStudent2) {
             Console.WriteLine($"{e.FirstName} {e.LastName}");
             }
+
+            Console.WriteLine("--------------------------------------");
+
+            // Which student is working on the most exercises? Make sure one of your students has more exercises than the others.
+            var filteredStudent3 = StudentList.OrderByDescending(e => e.StudentsExercises.Count).Take(1);
+            foreach(Student e in filteredStudent3) {
+            Console.Write($"{e.FirstName} {e.LastName}");
+            };
         }
     }
 }
