@@ -146,10 +146,41 @@ namespace StudentExercises
             CohortList.Add(Cohort28);
 
             // List exercises for the JavaScript language by using the Where() LINQ method.
-            var filtered = ExerciseList.Where(e => e.ExerciseLanguage == "Javascript").ToList();
-            foreach(Exercise e in filtered) {
+            var filteredExercise = ExerciseList.Where(e => e.ExerciseLanguage == "Javascript").ToList();
+            foreach(Exercise e in filteredExercise) {
             Console.WriteLine($"{e.ExerciseName}");
+            }
 
+            Console.WriteLine("--------------------------------------");
+
+            // List students in a particular cohort by using the Where() LINQ method.
+            var filteredStudent = StudentList.Where(s => s.StudentCohort == Cohort27).ToList();
+            foreach(Student e in filteredStudent) {
+            Console.WriteLine($"{e.FirstName} {e.LastName}");
+            }
+
+            Console.WriteLine("--------------------------------------");
+
+            // List instructors in a particular cohort by using the Where() LINQ method.
+            var filteredInstructor = InstructorList.Where(s => s.InstructorCohort == Cohort27).ToList();
+            foreach(Instructor e in filteredInstructor) {
+            Console.WriteLine($"{e.FirstName} {e.LastName}");
+            }
+
+            Console.WriteLine("--------------------------------------");
+            
+            // Sort the students by their last name.
+            var SortedByLastName = StudentList.OrderByDescending(b => b.LastName);
+            foreach(Student e in SortedByLastName) {
+            Console.WriteLine($"{e.FirstName} {e.LastName}");
+            }
+
+            Console.WriteLine("--------------------------------------");
+            
+            // Display any students that aren't working on any exercises
+            var filteredStudent2 = StudentList.Where(e => e.StudentsExercises.Count() == 0).ToList();
+            foreach(Student e in filteredStudent2) {
+            Console.WriteLine($"{e.FirstName} {e.LastName}");
             }
         }
     }
