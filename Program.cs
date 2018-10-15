@@ -191,6 +191,24 @@ namespace StudentExercises
             foreach(Student e in filteredStudent3) {
             Console.Write($"{e.FirstName} {e.LastName}");
             };
+            // Could have also done this
+            // var filteredStudent3 = StudentList.OrderByDescending(e => e.StudentsExercises.Count).First();
+            // Console.WriteLine($"{filteredStudent3.SlackHandle}");
+
+            Console.WriteLine("--------------------------------------");
+
+            //How many students in each cohort?
+            // var results = from student in StudentList
+            // group student.SlackHandle by student.StudentCohort into g
+            // select new { Cohort = g.Key, Name = g.ToList() };
+            // foreach(var e in results) {
+            //     Console.WriteLine($"{e.Cohort.CohortName}: {e.Name}");
+            // }
+            var results = StudentList.GroupBy(e => e.StudentCohort.CohortName);
+            foreach (var item in results)
+            {
+                Console.WriteLine($"{item.Key} has {item.Count()}");
+            }
         }
     }
 }

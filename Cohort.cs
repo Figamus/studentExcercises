@@ -17,7 +17,7 @@ namespace StudentExercises
             Instructors = new List<Instructor>();
         }
         public string CohortName;
-        List<Student> Students;
-        List<Instructor> Instructors;
+        public List<Student> Students;
+        public List<Instructor> Instructors;
     }
 }
