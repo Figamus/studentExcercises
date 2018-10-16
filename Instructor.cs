@@ -16,6 +16,7 @@ namespace StudentExercises
         public string FirstName;
         public string LastName;
         public string SlackHandle;
+        public int InstructorCohortId;
         public Cohort InstructorCohort;
 
 // Assignment method thanks to Kimmy
