@@ -12,6 +12,8 @@ Have each instructor assign 2 exercises to each of the students.
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Dapper;
+using Microsoft.Data.Sqlite;
 
 namespace StudentExercises
 {
@@ -209,6 +211,38 @@ namespace StudentExercises
             {
                 Console.WriteLine($"{item.Key} has {item.Count()}");
             }
+
+            Console.WriteLine("--------------------------------------");
+
+            SqliteConnection db = DatabaseInterface.Connection;
+            DatabaseInterface.CheckExerciseTable();
+
+            // Query the database for all the Exercises.
+            db.Query<Exercise>(@"SELECT * FROM Exercise")
+            .ToList()
+            .ForEach(ex => Console.WriteLine($"Exercise: {ex.ExerciseName}, written in {ex.ExerciseLanguage}"));
+
+            Console.WriteLine("--------------------------------------");
+
+            // Find all the exercises in the database where the language is JavaScript.
+            db.Query<Exercise>(@"SELECT * FROM Exercise")
+            .Where(ex => ex.ExerciseLanguage == "Javascript")
+            .ToList()
+            .ForEach(ex => Console.WriteLine($"Exercise: {ex.ExerciseName}, written in {ex.ExerciseLanguage}"));
+
+            Console.WriteLine("--------------------------------------");
+
+            // Insert a new exercise into the database.
+            db.Execute(@"
+                INSERT INTO Exercise (ExerciseName, ExerciseLanguage)
+                VALUES ('Map', 'Javascript')");
+
+
+            db.Query<Exercise>(@"SELECT * FROM Exercise")
+            .Where(ex => ex.ExerciseLanguage == "Javascript")
+            .ToList()
+            .ForEach(ex => Console.WriteLine($"Exercise: {ex.ExerciseName}, written in {ex.ExerciseLanguage}"));
+
         }
     }
 }
