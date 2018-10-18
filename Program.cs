@@ -212,6 +212,10 @@ namespace StudentExercises
                 Console.WriteLine($"{item.Key} has {item.Count()}");
             }
 
+
+
+
+
             Console.WriteLine("--------------------------------------");
 
             SqliteConnection db = DatabaseInterface.Connection;
@@ -233,16 +237,62 @@ namespace StudentExercises
             Console.WriteLine("--------------------------------------");
 
             // Insert a new exercise into the database.
-            db.Execute(@"
-                INSERT INTO Exercise (ExerciseName, ExerciseLanguage)
-                VALUES ('Map', 'Javascript')");
+                    // db.Execute(@"
+                    //     INSERT INTO Exercise (ExerciseName, ExerciseLanguage)
+                    //     VALUES ('Map', 'Javascript')");
+                    // db.Query<Exercise>(@"SELECT * FROM Exercise")
+                    // .Where(ex => ex.ExerciseLanguage == "Javascript")
+                    // .ToList()
+                    // .ForEach(ex => Console.WriteLine($"Exercise: {ex.ExerciseName}, written in {ex.ExerciseLanguage}"));
+            
+            Console.WriteLine("--------------------------------------");
 
+            // Find all instructors in the database. Include each instructor's cohort.
+            IEnumerable<Instructor> instructor2 = db.Query<Instructor, Cohort, Instructor>(@"
+            SELECT 
+                i.Id,
+                i.FirstName,
+                i.LastName,
+                i.SlackHandle,
+                i.InstructorCohortId,
+                c.Id,
+                c.CohortName
+            FROM Instructor i
+            JOIN Cohort c ON c.Id = i.InstructorCohortId",(instructor, cohort) => {
+                instructor.InstructorCohort = cohort;
+                return instructor;
+            });
 
-            db.Query<Exercise>(@"SELECT * FROM Exercise")
-            .Where(ex => ex.ExerciseLanguage == "Javascript")
-            .ToList()
-            .ForEach(ex => Console.WriteLine($"Exercise: {ex.ExerciseName}, written in {ex.ExerciseLanguage}"));
+            foreach (Instructor ins in instructor2)
+            {
+                Console.WriteLine($"{ins.FirstName} {ins.LastName} teaches {ins.InstructorCohort.CohortName}");
+            }
 
-        }
+            Console.WriteLine("--------------------------------------");
+
+            // Insert a new instructor into the database. Assign the instructor to an existing cohort.
+            // db.Execute(@"
+            //     INSERT INTO Instructor (FirstName, LastName, SlackHandle, InstructorCohortId)
+            //     VALUES ('Andy', 'Collins', 'Andy Collins', 2)");
+            db.Query<Instructor, Cohort, Instructor>(@"
+            SELECT 
+                i.Id,
+                i.FirstName,
+                i.LastName,
+                i.SlackHandle,
+                i.InstructorCohortId,
+                c.Id,
+                c.CohortName
+            FROM Instructor i
+            JOIN Cohort c ON c.Id = i.InstructorCohortId",(instructor, cohort) => {
+                instructor.InstructorCohort = cohort;
+                return instructor;
+            }).ToList().ForEach(ins => Console.WriteLine($"{ins.FirstName} {ins.LastName} teaches {ins.InstructorCohort.CohortName}"));
+
+            Console.WriteLine("--------------------------------------");
+
+            // Assign an existing exercise to an existing student.
+            DatabaseInterface.CheckAssignedExerciseTable();
+    }
     }
 }

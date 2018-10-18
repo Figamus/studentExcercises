@@ -36,5 +36,48 @@ namespace StudentExercises
                 }
             }
         }
+        public static void CheckInstructorTable()
+        {
+            SqliteConnection db = DatabaseInterface.Connection;
+            try
+            {
+                List<Instructor> retrievedInstructors = db.Query<Instructor>
+                ("Select Id From Instructor").ToList();
+            }
+            catch (System.Exception ex)
+            {
+                if (ex.Message.Contains("no such table"))
+                {
+                    db.Execute($@"CREATE TABLE `Instructor` (
+                        `Id`    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                        `FirstName`    TEXT NOT NULL,
+                        `LastName`    TEXT NOT NULL,
+                        `SlackHandle` TEXT NOT NULL,
+                        `CohortId` INTEGER NOT NULL
+                    )");
+                }
+            }
+        }
+        public static void CheckAssignedExerciseTable()
+        {
+            SqliteConnection db = DatabaseInterface.Connection;
+            try
+            {
+                List<AssignedExercise> retrievedInstructors = db.Query<AssignedExercise>
+                ("Select Id From AssignedExercise").ToList();
+            }
+            catch (System.Exception ex)
+            {
+                if (ex.Message.Contains("no such table"))
+                {
+                    Console.WriteLine("No Such Table. Creating new Table.");
+                    db.Execute($@"CREATE TABLE `AssignedExercise` (
+                        `Id`    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                        `StudentId` INTEGER NOT NULL,
+                        `CohortId` INTEGER NOT NULL
+                    )");
+                }
+            }
+        }
     }
 }
