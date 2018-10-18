@@ -4,7 +4,7 @@ namespace StudentExercises
 {
     public class AssignedExercise
     {
-        public int StudentId;
-        public int ExerciseId;
+        public int StudentId { get; set; }
+        public int ExerciseId { get; set; }
     }
 }

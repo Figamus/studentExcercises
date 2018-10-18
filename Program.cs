@@ -293,6 +293,45 @@ namespace StudentExercises
 
             // Assign an existing exercise to an existing student.
             DatabaseInterface.CheckAssignedExerciseTable();
+            // db.Execute(@"
+            //     INSERT INTO AssignedExercise (StudentId, ExerciseId)
+            //     VALUES ('2', '2');
+            // ");
+
+            // Challenge - Find all the students in the database. Include each student's cohort AND each student's list of exercises.
+            Dictionary<Student, List<Exercise>> CulminatedExercise = new Dictionary<Student, List<Exercise>>();
+
+            db.Query<Student, Cohort, Exercise, Student>(@"
+            SELECT 
+                s.Id,
+                s.FirstName,
+                s.LastName,
+                s.SlackHandle,
+                s.StudentCohortId,
+                c.Id,
+                c.CohortName,
+                e.Id,
+                e.ExerciseName,
+                e.ExerciseLanguage
+            FROM Student s
+            JOIN AssignedExercise ae ON ae.StudentId = s.Id
+            JOIN Cohort c ON c.Id = s.StudentCohortId
+            JOIN Exercise e ON e.Id = ae.ExerciseId",(student, cohort, exercise) => {
+                if (!CulminatedExercise.ContainsKey(student)) {
+                        student.StudentCohort = cohort;
+                        CulminatedExercise[student] = new List<Exercise>();
+                    }
+                    CulminatedExercise[student].Add(exercise);
+                    return student;});
+            
+            foreach(KeyValuePair<Student, List<Exercise>> ex in CulminatedExercise)
+                {
+                    Console.WriteLine($"{ex.Key.SlackHandle} is in {ex.Key.StudentCohort.CohortName} and is working:");
+                    foreach (Exercise item in ex.Value)
+                    {
+                        Console.WriteLine($"{item.ExerciseName}  written in {item.ExerciseLanguage}");
+                    }
+                }
     }
     }
 }

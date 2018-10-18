@@ -74,7 +74,7 @@ namespace StudentExercises
                     db.Execute($@"CREATE TABLE `AssignedExercise` (
                         `Id`    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                         `StudentId` INTEGER NOT NULL,
-                        `CohortId` INTEGER NOT NULL
+                        `ExerciseId` INTEGER NOT NULL
                     )");
                 }
             }
